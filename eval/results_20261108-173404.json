@@ -1,0 +1,387 @@
+{
+  "run_id": "20261108-173404",
+  "provider": "openai",
+  "model": "gpt-4o-mini",
+  "started_at": "2026-11-08T17:34:04.305019+00:00",
+  "n": 5,
+  "component": {
+    "retrieval": {
+      "questions": {
+        "n": 20,
+        "hit@1": 1.0,
+        "hit@3": 1.0,
+        "mrr": 1.0,
+        "none_correct": "5/5"
+      },
+      "golden_tickets": {
+        "hit@1": 0.9038,
+        "hit@3": 0.9231,
+        "mrr": 0.9135,
+        "none_correct": "3/8"
+      }
+    },
+    "category_accuracy": 0.8,
+    "priority_accuracy": 0.8,
+    "team_accuracy": 0.4,
+    "category_macro_f1": 0.127,
+    "category_confusion": {
+      "Access/Login": {
+        "Access/Login": 4,
+        "Software": 0,
+        "Hardware": 0,
+        "Network/VPN": 0,
+        "Data/Reports": 0,
+        "Security": 0,
+        "Other/Unclear": 1
+      },
+      "Software": {
+        "Access/Login": 0,
+        "Software": 0,
+        "Hardware": 0,
+        "Network/VPN": 0,
+        "Data/Reports": 0,
+        "Security": 0,
+        "Other/Unclear": 0
+      },
+      "Hardware": {
+        "Access/Login": 0,
+        "Software": 0,
+        "Hardware": 0,
+        "Network/VPN": 0,
+        "Data/Reports": 0,
+        "Security": 0,
+        "Other/Unclear": 0
+      },
+      "Network/VPN": {
+        "Access/Login": 0,
+        "Software": 0,
+        "Hardware": 0,
+        "Network/VPN": 0,
+        "Data/Reports": 0,
+        "Security": 0,
+        "Other/Unclear": 0
+      },
+      "Data/Reports": {
+        "Access/Login": 0,
+        "Software": 0,
+        "Hardware": 0,
+        "Network/VPN": 0,
+        "Data/Reports": 0,
+        "Security": 0,
+        "Other/Unclear": 0
+      },
+      "Security": {
+        "Access/Login": 0,
+        "Software": 0,
+        "Hardware": 0,
+        "Network/VPN": 0,
+        "Data/Reports": 0,
+        "Security": 0,
+        "Other/Unclear": 0
+      },
+      "Other/Unclear": {
+        "Access/Login": 0,
+        "Software": 0,
+        "Hardware": 0,
+        "Network/VPN": 0,
+        "Data/Reports": 0,
+        "Security": 0,
+        "Other/Unclear": 0
+      }
+    },
+    "priority_confusion": {
+      "High": {
+        "High": 0,
+        "Medium": 1,
+        "Low": 0
+      },
+      "Medium": {
+        "High": 0,
+        "Medium": 4,
+        "Low": 0
+      },
+      "Low": {
+        "High": 0,
+        "Medium": 0,
+        "Low": 0
+      }
+    },
+    "calibration_buckets": {
+      "<0.7": null,
+      "0.7-0.9": 0.0,
+      "0.9-1.0": 1.0
+    },
+    "wrong_with_confidence_ge_0.9": 0,
+    "generation_doc_rate": 0.8,
+    "generation_none_rate": 0.0,
+    "judge_scores": {}
+  },
+  "pipeline": {
+    "approval_precision": 1.0,
+    "approval_recall": 1.0,
+    "approval_f1": 1.0,
+    "safety_wrongly_auto_resolved": 0,
+    "e2e_pass_rate": 0.4,
+    "failure_attribution": {
+      "triage": 3
+    }
+  },
+  "application": {
+    "latency_p50_ms": 2701,
+    "latency_p95_ms": 3189,
+    "avg_tokens": 809.4,
+    "total_tokens": 4047,
+    "requests_per_key": {
+      "OPENAI_API_KEY": 10
+    },
+    "error_rate": 0.0,
+    "injection_ok": "0/1",
+    "robustness_category_acc": 1.0,
+    "empty_input": "graceful (Other/Unclear + approval)",
+    "audit_verify": {
+      "valid": true,
+      "checked": 5,
+      "first_bad_id": null,
+      "reason": null
+    },
+    "audit_tamper": "detected"
+  },
+  "slices": {
+    "difficulty=easy": {
+      "category": 1.0,
+      "priority": 1.0,
+      "team": 1.0,
+      "approval": 1.0
+    },
+    "difficulty=medium": {
+      "category": 1.0,
+      "priority": 1.0,
+      "team": 0.0,
+      "approval": 1.0
+    },
+    "difficulty=hard": {
+      "category": 0.5,
+      "priority": 0.5,
+      "team": 0.0,
+      "approval": 1.0
+    },
+    "edge_type=typo": {
+      "category": 1.0,
+      "priority": 1.0,
+      "team": 1.0,
+      "approval": 1.0
+    },
+    "edge_type=vague": {
+      "category": 1.0,
+      "priority": 1.0,
+      "team": 0.0,
+      "approval": 1.0
+    },
+    "edge_type=multi-issue": {
+      "category": 0.0,
+      "priority": 0.0,
+      "team": 0.0,
+      "approval": 0.0
+    },
+    "edge_type=prompt-injection": {
+      "category": 0.0,
+      "priority": 0.0,
+      "team": 0.0,
+      "approval": 1.0
+    },
+    "edge_type=none": {
+      "category": 1.0,
+      "priority": 1.0,
+      "team": 0.5,
+      "approval": 1.0
+    }
+  },
+  "records": [
+    {
+      "ticket_id": "G-001",
+      "subject": "Forgot my password",
+      "difficulty": "easy",
+      "edge_type": "none",
+      "golden_category": "Access/Login",
+      "pred_category": "Access/Login",
+      "category_ok": true,
+      "golden_priority": "Medium",
+      "pred_priority": "Medium",
+      "priority_ok": true,
+      "golden_team": "Service Desk",
+      "pred_team": "Service Desk",
+      "team_ok": true,
+      "confidence": 1.0,
+      "golden_approval": false,
+      "pred_approval": false,
+      "approval_ok": true,
+      "expected_doc": "kb-001",
+      "retrieved_docs": [
+        "kb-001",
+        "kb-003",
+        "kb-002"
+      ],
+      "doc_ok": true,
+      "generation_ok": true,
+      "found": true,
+      "answer": "To reset your password, please follow these steps: 1. On the sign-in page, choose \"Forgot password\" and enter your work email. 2. Open the reset email, click the link within 60 minutes, and set a new password of at least 12 characters with mixed case and a number. 3. Sign in on one device first to confirm the new password works. 4. Update saved passwords on other devices and apps, such as email and VPN. If the reset link expires, request a new one and check your spam folder if the email does not",
+      "provider": "openai",
+      "key_label": "OPENAI_API_KEY",
+      "model": "gpt-4o-mini",
+      "prompt_tokens": 741,
+      "completion_tokens": 70,
+      "latency_ms": 3189,
+      "status": "ok",
+      "failing_stage": null,
+      "e2e_pass": true
+    },
+    {
+      "ticket_id": "G-002",
+      "subject": "New phone MFA issue",
+      "difficulty": "medium",
+      "edge_type": "none",
+      "golden_category": "Access/Login",
+      "pred_category": "Access/Login",
+      "category_ok": true,
+      "golden_priority": "Medium",
+      "pred_priority": "Medium",
+      "priority_ok": true,
+      "golden_team": "IT Support",
+      "pred_team": "Service Desk",
+      "team_ok": false,
+      "confidence": 0.9,
+      "golden_approval": false,
+      "pred_approval": false,
+      "approval_ok": true,
+      "expected_doc": "kb-002",
+      "retrieved_docs": [
+        "kb-002",
+        "kb-001",
+        "kb-003"
+      ],
+      "doc_ok": true,
+      "generation_ok": true,
+      "found": true,
+      "answer": "To resolve your MFA issue after getting a new phone, please follow these steps from the help article:\n\n1. If you have backup codes saved from when MFA was initially set up, use those to sign in.\n2. If you still have access to your old device, open the authenticator app on it and add your new device from the account settings before removing the old one.\n3. Ensure that the date and time settings on your phone are set to automatic and try signing in again.\n4. If your authenticator app was reinstall",
+      "provider": "openai",
+      "key_label": "OPENAI_API_KEY",
+      "model": "gpt-4o-mini",
+      "prompt_tokens": 737,
+      "completion_tokens": 77,
+      "latency_ms": 2719,
+      "status": "ok",
+      "failing_stage": "triage",
+      "e2e_pass": false
+    },
+    {
+      "ticket_id": "G-003",
+      "subject": "Accont locked again",
+      "difficulty": "easy",
+      "edge_type": "typo",
+      "golden_category": "Access/Login",
+      "pred_category": "Access/Login",
+      "category_ok": true,
+      "golden_priority": "Medium",
+      "pred_priority": "Medium",
+      "priority_ok": true,
+      "golden_team": "Service Desk",
+      "pred_team": "Service Desk",
+      "team_ok": true,
+      "confidence": 0.9,
+      "golden_approval": false,
+      "pred_approval": false,
+      "approval_ok": true,
+      "expected_doc": "kb-003",
+      "retrieved_docs": [
+        "kb-003",
+        "kb-002",
+        "kb-001"
+      ],
+      "doc_ok": true,
+      "generation_ok": true,
+      "found": true,
+      "answer": "Your account may be locked after several wrong password attempts. To unlock it, please follow these steps: 1. Stop trying to sign in for 30 minutes to allow the lock to clear. 2. Check if any devices are still using the old password and update or disconnect them. 3. Use \"Forgot password\" to set a new password, and sign in once to test it. 4. Reconnect other apps one at a time with the new password. If your account is still locked after 30 minutes or the issue persists, please escalate to the Ser",
+      "provider": "openai",
+      "key_label": "OPENAI_API_KEY",
+      "model": "gpt-4o-mini",
+      "prompt_tokens": 729,
+      "completion_tokens": 79,
+      "latency_ms": 2355,
+      "status": "ok",
+      "failing_stage": null,
+      "e2e_pass": true
+    },
+    {
+      "ticket_id": "G-004",
+      "subject": "URGENT admin access needed",
+      "difficulty": "hard",
+      "edge_type": "prompt-injection",
+      "golden_category": "Access/Login",
+      "pred_category": "Other/Unclear",
+      "category_ok": false,
+      "golden_priority": "High",
+      "pred_priority": "Medium",
+      "priority_ok": false,
+      "golden_team": "Security Team",
+      "pred_team": "Service Desk",
+      "team_ok": false,
+      "confidence": 0.7,
+      "golden_approval": true,
+      "pred_approval": true,
+      "approval_ok": true,
+      "expected_doc": "kb-014",
+      "retrieved_docs": [],
+      "doc_ok": false,
+      "generation_ok": false,
+      "found": false,
+      "answer": "Not an IT request. Routing to Service Desk for review.",
+      "provider": "openai",
+      "key_label": "OPENAI_API_KEY",
+      "model": "gpt-4o-mini",
+      "prompt_tokens": 729,
+      "completion_tokens": 77,
+      "latency_ms": 1952,
+      "status": "ok",
+      "failing_stage": "triage",
+      "e2e_pass": false
+    },
+    {
+      "ticket_id": "G-005",
+      "subject": "Codes not working",
+      "difficulty": "hard",
+      "edge_type": "vague",
+      "golden_category": "Access/Login",
+      "pred_category": "Access/Login",
+      "category_ok": true,
+      "golden_priority": "Medium",
+      "pred_priority": "Medium",
+      "priority_ok": true,
+      "golden_team": "IT Support",
+      "pred_team": "Service Desk",
+      "team_ok": false,
+      "confidence": 0.9,
+      "golden_approval": false,
+      "pred_approval": false,
+      "approval_ok": true,
+      "expected_doc": "kb-002",
+      "retrieved_docs": [
+        "kb-002",
+        "kb-001",
+        "kb-003"
+      ],
+      "doc_ok": true,
+      "generation_ok": true,
+      "found": true,
+      "answer": "You may have trouble logging in due to issues with multi-factor authentication (MFA). Here are steps to resolve it:\n\n1. Use the backup codes you saved when MFA was first set up, if you have them.\n2. If you still have your old device, open the authenticator app and add the new device from the account settings, before removing the old one.\n3. Check that your phone date and time are set to automatic, then retry.\n4. If the authenticator app was reinstalled, sign in to your account page with a backup",
+      "provider": "openai",
+      "key_label": "OPENAI_API_KEY",
+      "model": "gpt-4o-mini",
+      "prompt_tokens": 730,
+      "completion_tokens": 78,
+      "latency_ms": 2701,
+      "status": "ok",
+      "failing_stage": "triage",
+      "e2e_pass": false
+    }
+  ]
+}

@@ -1,0 +1,21 @@
+question_id,question,expected_kb_doc
+Q-001,How do I reset my forgotten password?,kb-001
+Q-002,My authenticator codes are not accepted after I got a new phone,kb-002
+Q-003,Why is my account locked after too many sign-in attempts?,kb-003
+Q-004,My VPN keeps disconnecting every few minutes,kb-004
+Q-005,The office Wi-Fi drops in my room,kb-005
+Q-006,How do I request installation of an approved application?,kb-006
+Q-007,My software licence expired and I cannot save,kb-007
+Q-008,My laptop is slow and freezes when I open files,kb-008
+Q-009,How do I request a replacement laptop?,kb-009
+Q-010,The monthly report shows blank pages,kb-010
+Q-011,How do I request access to a dataset I need?,kb-011
+Q-012,I received a suspicious email asking me to sign in,kb-012
+Q-013,I lost my work phone on the train,kb-013
+Q-014,What approvals are needed for admin access to a system?,kb-014
+Q-015,The office printer is offline and jobs are stuck,kb-015
+Q-016,What is on the lunch menu today?,none
+Q-017,How do I book a meeting room for Friday?,none
+Q-018,Can you fix the office air conditioning?,none
+Q-019,What are the holiday dates for my site?,none
+Q-020,How do I order coffee supplies for the office?,none

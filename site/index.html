@@ -1,0 +1,285 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>TicketPilot — IT ticket triage with human approval and a tamper-evident audit trail</title>
+<meta name="description" content="TicketPilot triages IT tickets with an LLM, suggests cited fixes, routes sensitive work to humans, and records every decision in a hash-chained audit log.">
+<script>
+/* Theme: default Light for first-time visitors (any OS); saved choice
+   wins. Runs before CSS paints so there is no flash of the wrong theme. */
+(function () {
+  try {
+    var saved = localStorage.getItem("ticketpilot-theme");
+    document.documentElement.dataset.theme =
+      (saved === "dark" || saved === "light") ? saved : "light";
+  } catch (e) {
+    document.documentElement.dataset.theme = "light";
+  }
+})();
+</script>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Mono:wght@400;500&family=IBM+Plex+Sans:wght@400;600;700&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="styles.css">
+</head>
+<body>
+<a class="skip-link" href="#main">Skip to main content</a>
+
+<header class="site-header">
+  <div class="header-inner">
+    <a class="brand" href="#top">
+      <span class="logo-mark" aria-hidden="true">
+        <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="#FFFFFF" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M4 8a2 2 0 0 1 2-2h12a2 2 0 0 1 2 2v4a2 2 0 0 0 0 4v2a2 2 0 0 1-2 2H6a2 2 0 0 1-2-2v-2a2 2 0 0 0 0-4z"/><path d="M13 6v4"/><path d="M13 14v4"/></svg>
+      </span>
+      TicketPilot
+    </a>
+    <nav class="site-nav" aria-label="Primary">
+      <!-- TODO: replace "#" with the real demo video URL -->
+      <a href="#">Demo video</a>
+      <!-- TODO: replace "#" with the real repository URL -->
+      <a href="#">Repository</a>
+      <a href="#evaluation">Evaluation</a>
+      <span class="theme-toggle" role="group" aria-label="Color theme">
+        <button type="button" id="theme-light" aria-pressed="true">Light</button>
+        <button type="button" id="theme-dark" aria-pressed="false">Dark</button>
+      </span>
+    </nav>
+  </div>
+</header>
+
+<main id="main">
+  <div class="container">
+    <section class="hero" id="top" aria-labelledby="hero-heading">
+      <span class="hero-kicker">AI-assisted IT ticket triage · human approval · audit trail</span>
+      <h1 id="hero-heading">IT tickets, triaged by AI. Decided by people.</h1>
+      <p class="subline">An LLM classifies each ticket, retrieval suggests a cited fix or says it does not know, a code rule routes sensitive work to a human, and every decision lands in a tamper-evident audit log.</p>
+      <div class="cta-row">
+        <!-- TODO: replace "#" with the real demo video URL -->
+        <a class="btn btn-primary" href="#">Watch the demo</a>
+        <a class="btn btn-secondary" href="#evaluation">See the evaluation</a>
+      </div>
+      <figure class="shot">
+        <img src="assets/dashboard.png" width="1440" height="810" fetchpriority="high" alt="Tickets Dashboard with status counts (Total 3, Auto-resolved 1, Pending 1, Approved 1), a ticket table, and a detail card for an admin-access ticket showing the original request, AI result, suggested fix, timeline, and Change decision form.">
+        <figcaption>The Tickets Dashboard: every ticket with its latest decision, revision count, and per-ticket audit timeline.</figcaption>
+      </figure>
+    </section>
+
+    <section id="problem" aria-labelledby="problem-heading">
+      <span class="section-num">01</span>
+      <h2 id="problem-heading">The problem</h2>
+      <p>IT teams read and route every ticket by hand: a person opens the ticket, guesses the category and priority, finds the right team, and decides whether it is safe to act. Sensitive requests — admin access, trial data, lost devices — wait in the same queue as password resets, and the reasoning behind each decision is usually lost.</p>
+      <p>Regulated teams need the opposite: every decision traceable, every sensitive action approved by a person, and a record that shows exactly what the system did and why.</p>
+    </section>
+
+    <section id="how" aria-labelledby="how-heading">
+      <span class="section-num">02</span>
+      <h2 id="how-heading">How it works</h2>
+      <div class="flow">
+        <article class="flow-step reveal">
+          <span class="num">01 · Ticket in</span>
+          <p>A ticket arrives by email, portal, chat, or the web form: subject, description, department, channel, affected system.</p>
+        </article>
+        <article class="flow-step reveal">
+          <span class="num">02 · Triage and cited fix</span>
+          <p>The LLM returns validated JSON (category, priority, team, sensitivity, confidence). Retrieval over a 15-document knowledge base grounds the suggested fix, or returns “no matching article” instead of guessing.</p>
+        </article>
+        <article class="flow-step reveal">
+          <span class="num">03 · Human approval when a rule fires</span>
+          <p>A code rule — not the LLM — forces approval for security incidents, trial data, elevated access, low confidence, and unclear tickets. A keyword safety net catches lost devices and MFA-code requests.</p>
+        </article>
+        <article class="flow-step reveal">
+          <span class="num">04 · Append-only audit log</span>
+          <p>Every triage, fix, and decision is appended as a SHA-256 hash-chained row. Revising a decision adds a new row; nothing is edited or deleted. One button verifies the whole chain.</p>
+        </article>
+      </div>
+      <figure class="flow-diagram shot">
+        <svg viewBox="0 0 1100 86" role="img" aria-label="Pipeline: ticket, FastAPI backend, LLM triage, approval rule, audit log, Streamlit dashboard. Chroma retrieval and Langfuse tracing run alongside.">
+          <defs>
+            <marker id="arrow" markerWidth="8" markerHeight="8" refX="6" refY="3" orient="auto">
+              <path d="M0 0 L6 3 L0 6 Z" fill="var(--accent)"></path>
+            </marker>
+          </defs>
+          <g font-family="IBM Plex Sans, sans-serif" font-size="13">
+            <rect x="5" y="15" width="140" height="52" rx="8" fill="var(--surface)" stroke="var(--border)"></rect>
+            <text x="75" y="47" text-anchor="middle" fill="var(--text)">Ticket</text>
+            <rect x="185" y="15" width="150" height="52" rx="8" fill="var(--surface)" stroke="var(--border)"></rect>
+            <text x="260" y="47" text-anchor="middle" fill="var(--text)">FastAPI backend</text>
+            <rect x="375" y="15" width="150" height="52" rx="8" fill="var(--surface)" stroke="var(--border)"></rect>
+            <text x="450" y="47" text-anchor="middle" fill="var(--text)">LLM triage</text>
+            <rect x="565" y="15" width="150" height="52" rx="8" fill="var(--surface)" stroke="var(--border)"></rect>
+            <text x="640" y="47" text-anchor="middle" fill="var(--text)">Approval rule</text>
+            <rect x="755" y="15" width="150" height="52" rx="8" fill="var(--surface)" stroke="var(--border)"></rect>
+            <text x="830" y="47" text-anchor="middle" fill="var(--text)">Audit log</text>
+            <rect x="945" y="15" width="150" height="52" rx="8" fill="var(--surface)" stroke="var(--border)"></rect>
+            <text x="1020" y="47" text-anchor="middle" fill="var(--text)">Streamlit UI</text>
+            <line x1="145" y1="41" x2="180" y2="41" stroke="var(--accent)" stroke-width="2" marker-end="url(#arrow)"></line>
+            <line x1="335" y1="41" x2="370" y2="41" stroke="var(--accent)" stroke-width="2" marker-end="url(#arrow)"></line>
+            <line x1="525" y1="41" x2="560" y2="41" stroke="var(--accent)" stroke-width="2" marker-end="url(#arrow)"></line>
+            <line x1="715" y1="41" x2="750" y2="41" stroke="var(--accent)" stroke-width="2" marker-end="url(#arrow)"></line>
+            <line x1="905" y1="41" x2="940" y2="41" stroke="var(--accent)" stroke-width="2" marker-end="url(#arrow)"></line>
+          </g>
+        </svg>
+        <figcaption>Ticket to dashboard. Chroma retrieval and Langfuse tracing run alongside the pipeline.</figcaption>
+      </figure>
+    </section>
+
+    <section id="features" aria-labelledby="features-heading">
+      <span class="section-num">03</span>
+      <h2 id="features-heading">Features</h2>
+      <div class="feature-grid">
+        <article class="feature wide reveal">
+          <img src="assets/submit-result.png" width="1440" height="810" alt="Submit Ticket result showing Network/VPN, Medium priority, Network Team, confidence 0.98, and a step-by-step suggested fix citing KB docs kb-004 and kb-005.">
+          <h3>Validated JSON triage, fixes grounded in a knowledge base</h3>
+          <p>Category, sub-category, priority, team, sensitivity, and confidence come back as Pydantic-validated JSON. Fix steps are written only from retrieved help articles and cite them; below the similarity threshold the answer is “No matching help article found” — never an invented fix.</p>
+        </article>
+        <article class="feature reveal">
+          <div class="visual">
+            <ul>
+              <li>sensitivity is security-incident or trial-data-related</li>
+              <li>admin / elevated access requested</li>
+              <li>confidence below threshold</li>
+              <li>category is Other/Unclear</li>
+            </ul>
+          </div>
+          <h3>Approval rules enforced in code</h3>
+          <p>The LLM’s own approval flag is ignored. Security-incident and trial-data sensitivities, elevated-access keywords, low confidence, and unclear tickets force human review in Python, with a keyword safety net for lost devices, typed passwords, and MFA-code requests.</p>
+        </article>
+        <article class="feature reveal">
+          <img src="assets/approvals.png" width="1440" height="810" loading="lazy" alt="Approvals page showing a pending ticket card with the original request, the AI result, a why-approval-is-needed line, an approver name field, a note field, and Approve and Reject buttons.">
+          <h3>Revisable decisions</h3>
+          <p>The Approvals page shows the original request text next to the AI result. Approved or rejected tickets can be flipped by a named approver with a required reason; the revision is a new audit row that points at the decision it revises.</p>
+        </article>
+        <article class="feature reveal">
+          <div class="visual hash-chain">row 3&nbsp;&nbsp;prev c0de1d5c&nbsp;&nbsp;hash fdb524fa<br>row 4&nbsp;&nbsp;prev fdb524fa&nbsp;&nbsp;hash 5dddec26<br>row 5&nbsp;&nbsp;prev 5dddec26&nbsp;&nbsp;hash d38c7139</div>
+          <h3>SHA-256 hash-chained audit log</h3>
+          <p>Each row hashes its contents plus the previous row’s hash. A Verify button recomputes the chain and names the first broken row and the reason.</p>
+        </article>
+        <article class="feature reveal">
+          <div class="visual">
+            <table class="key-table">
+              <tr><td>GROQ_API_KEY_1</td><td>14 requests <span class="key-bar" style="width:56px"></span></td></tr>
+              <tr><td>GROQ_API_KEY_3</td><td>14 requests <span class="key-bar" style="width:56px"></span></td></tr>
+              <tr><td>GROQ_API_KEY_6</td><td>14 requests <span class="key-bar" style="width:56px"></span></td></tr>
+            </table>
+          </div>
+          <h3>Langfuse tracing and per-key usage</h3>
+          <p>Every ticket gets a Langfuse trace (triage, retrieval, generation spans) with provider, key label, model, tokens, and latency — never keys or ticket text. The Key Usage page shows requests per Groq key, labels and last four characters only.</p>
+        </article>
+      </div>
+    </section>
+
+    <section id="evidence" aria-labelledby="evidence-heading">
+      <span class="section-num">04</span>
+      <h2 id="evidence-heading">Evidence</h2>
+      <p>Measured on unseen tickets and a tuned golden set. Every number below comes from the saved eval result files.</p>
+      <div class="evidence">
+        <div class="stat reveal">
+          <span class="value">0</span>
+          <span class="label">Safety misses on the hold-out set, on both Groq and OpenAI</span>
+          <span class="source">results_holdout_groq.json · results_holdout_openai.json</span>
+        </div>
+        <div class="stat reveal">
+          <span class="value">90</span>
+          <span class="label">Test tickets: 60 golden plus 30 hold-out</span>
+          <span class="source">data/golden_tickets.csv · data/holdout_tickets.csv</span>
+        </div>
+        <div class="stat reveal">
+          <span class="value">11 of 12</span>
+          <span class="label">Injection resistance on the hold-out, on both providers</span>
+          <span class="source">results_holdout_groq.json · results_holdout_openai.json</span>
+        </div>
+        <div class="stat reveal">
+          <span class="value">1.0</span>
+          <span class="label">Approval recall on the hold-out, on both providers</span>
+          <span class="source">results_holdout_groq.json · results_holdout_openai.json</span>
+        </div>
+        <div class="stat reveal">
+          <span class="value">1042 ms</span>
+          <span class="label">Latency p50 on Groq, hold-out set</span>
+          <span class="source">results_holdout_groq.json</span>
+        </div>
+      </div>
+      <p class="honest-note">Hold-out is small (30 tickets) and adversarial by design; the golden set was also used for tuning, so golden-set scores are optimistic.</p>
+    </section>
+
+    <section id="evaluation" aria-labelledby="eval-heading">
+      <span class="section-num">05</span>
+      <h2 id="eval-heading">Evaluation</h2>
+      <p>Groq vs OpenAI on the hold-out set (30 tickets written after tuning, never used for tuning):</p>
+      <div class="table-wrap">
+        <table>
+          <caption>Hold-out results by provider. Thresholds, prompts, and retrieval index identical for both runs.</caption>
+          <thead>
+            <tr><th>Metric</th><th>Groq</th><th>OpenAI</th></tr>
+          </thead>
+          <tbody>
+            <tr><td>Category accuracy</td><td>0.9333</td><td>0.8667</td></tr>
+            <tr><td>Priority accuracy</td><td>0.7333</td><td>0.6</td></tr>
+            <tr><td>Team accuracy</td><td>0.8667</td><td>0.9</td></tr>
+            <tr><td>Approval precision</td><td>0.9091</td><td>0.625</td></tr>
+            <tr><td>Approval recall</td><td>1.0</td><td>1.0</td></tr>
+            <tr><td>Approval F1</td><td>0.9524</td><td>0.7692</td></tr>
+            <tr><td>Safety misses</td><td>0</td><td>0</td></tr>
+            <tr><td>End-to-end pass rate</td><td>0.7</td><td>0.5667</td></tr>
+            <tr><td>Retrieval hit@3</td><td>0.8519</td><td>0.8519</td></tr>
+            <tr><td>Injection resistance</td><td>11 of 12</td><td>11 of 12</td></tr>
+            <tr><td>Latency p50 (ms)</td><td>1042</td><td>1862</td></tr>
+            <tr><td>Latency p95 (ms)</td><td>1608</td><td>2760</td></tr>
+          </tbody>
+        </table>
+      </div>
+      <p>Safety held at zero misses on both because approval is a code rule, not the model: the keyword safety net and the approval rule override the model’s sensitivity label before a ticket can auto-resolve. Groq led on most metrics here, but the prompts were tuned on Groq and the set has only 30 tickets, so the comparison is indicative only.</p>
+    </section>
+
+    <section id="stack" aria-labelledby="stack-heading">
+      <span class="section-num">06</span>
+      <h2 id="stack-heading">Built with</h2>
+      <ul class="stack-list">
+        <li>Python 3, FastAPI, Pydantic v2</li>
+        <li>Groq and OpenAI chat APIs via requests</li>
+        <li>ChromaDB and sentence-transformers (local embeddings)</li>
+        <li>SQLite with a SHA-256 hash chain</li>
+        <li>Langfuse tracing (optional)</li>
+        <li>Streamlit with a Light/Dark enterprise theme</li>
+        <li>pytest, mocked tests, no network in CI</li>
+        <li>Vanilla HTML and CSS for this page</li>
+      </ul>
+    </section>
+
+    <section id="limits" aria-labelledby="limits-heading">
+      <span class="section-num">07</span>
+      <h2 id="limits-heading">Limitations and next steps</h2>
+      <h3>Limitations</h3>
+      <ul>
+        <li>Synthetic data and a small golden set (60 tickets); real traffic will differ.</li>
+        <li>The golden set was used for tuning, so scores are optimistic; the hold-out set is small (30) and adversarial by design.</li>
+        <li>No authentication; local demo only.</li>
+        <li>Priority labels are partly subjective, and the model’s confidence is overconfident.</li>
+      </ul>
+      <h3>Next steps</h3>
+      <ul>
+        <li>Upload-your-own documents with a per-workspace knowledge base.</li>
+        <li>An MCP server exposing triage and search tools, with approval staying human-only.</li>
+        <li>A deployment path beyond a local demo.</li>
+        <li>Per-model prompt tuning and a larger hold-out set.</li>
+      </ul>
+    </section>
+  </div>
+</main>
+
+<footer class="site-footer">
+  <div class="container">
+    <div class="footer-links">
+      <!-- TODO: replace "#" with the real GitHub URL -->
+      <a href="#">GitHub</a>
+      <!-- TODO: replace "#" with the real LinkedIn URL -->
+      <a href="#">LinkedIn</a>
+    </div>
+    <p>Viraj Patel · Demo project using synthetic data.</p>
+  </div>
+</footer>
+
+<script src="script.js"></script>
+</body>
+</html>

@@ -1,0 +1,42 @@
+.env
+.env.*
+!.env.example
+__pycache__/
+*.pyc
+.pytest_cache/
+data/audit.db
+data/audit_backup_*.db
+data/llm_calls.jsonl
+data/chroma/
+.venv/
+*.log
+eval/cache/
+.playwright-mcp/
+pw-out/
+docs/screenshots/
+
+# IDE / editor
+.vscode/
+.idea/
+
+# Dependencies
+node_modules/
+
+# Build / dist
+dist/
+build/
+*.egg-info/
+
+# OS
+.DS_Store
+Thumbs.db
+
+# Logs directory
+logs/
+
+# Model files
+*.bin
+*.pt
+*.pth
+*.onnx
+*.safetensors

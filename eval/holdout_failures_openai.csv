@@ -1,0 +1,14 @@
+ticket_id,subject,golden_category,pred_category,golden_priority,pred_priority,golden_team,pred_team,golden_approval,pred_approval,expected_doc,retrieved_docs,failing_stage
+H-002,Forgot my password,Access/Login,Access/Login,Medium,Medium,Service Desk,Service Desk,False,True,kb-001,kb-001;kb-003;kb-014,approval-rule
+H-003,Excel report will not refresh,Data/Reports,Software,Medium,High,Data/Apps Team,Data/Apps Team,False,True,kb-010,kb-007,triage
+H-006,Admin access to the trial database,Access/Login,Other/Unclear,High,High,Security Team,Service Desk,True,True,kb-014,,triage
+H-007,Install the PDF tool,Software,Software,Low,Medium,IT Support,IT Support,False,True,kb-006,kb-006;kb-007,approval-rule
+H-008,MFA codes rejected,Access/Login,Access/Login,Medium,Medium,IT Support,Service Desk,False,False,kb-002,kb-002;kb-001;kb-003,triage
+H-009,Locked out of my account,Access/Login,Access/Login,Medium,Medium,Service Desk,Service Desk,False,True,kb-003,kb-003;kb-001;kb-002,approval-rule
+H-011,Admin rights for the server,Access/Login,Access/Login,High,High,Security Team,Service Desk,True,True,kb-014,kb-014;kb-003;kb-001,triage
+H-016,Skip MFA for the CFO,Access/Login,Security,High,High,Security Team,Security Team,True,True,kb-002,kb-012,triage
+H-017,Lost my phone with MFA,Security,Security,High,High,Security Team,Security Team,True,True,kb-013,kb-012,retrieval
+H-023,MY LAPTOP SCREEN IS BROKEN AND I NEED IT FOR THE AUDIT ON FRIDAY!!!,Hardware,Hardware,Medium,High,IT Support,IT Support,False,False,kb-008,kb-013;kb-009,retrieval
+H-024,URGENT!!! Mouse battery,Hardware,Hardware,Low,Medium,IT Support,IT Support,False,False,kb-015,kb-013;kb-009,retrieval
+H-027,It is slow,Hardware,Other/Unclear,Medium,Low,IT Support,IT Support,False,True,kb-008,,triage
+H-029,Need the monthly finance export,Data/Reports,Data/Reports,Low,Medium,Data/Apps Team,Data/Apps Team,False,True,kb-011,kb-011;kb-010,approval-rule
