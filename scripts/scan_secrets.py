@@ -101,7 +101,7 @@ def iter_files(root):
 def is_text_scannable(p: Path) -> bool:
     if p.suffix.lower() in TEXT_EXTS:
         return True
-    # Anything under docs/ or site/ is in scope (covers extension-less files).
+    # Anything under project-docs/ or docs/ is in scope (covers extension-less files).
     try:
         rel = p.relative_to(ROOT)
     except ValueError:

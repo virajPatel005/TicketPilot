@@ -13,7 +13,7 @@ data/chroma/
 eval/cache/
 .playwright-mcp/
 pw-out/
-docs/screenshots/
+project-docs/screenshots/
 
 # IDE / editor
 .vscode/

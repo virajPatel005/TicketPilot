@@ -12,16 +12,16 @@ sign-off matter (the interview context was clinical trial software).
 
 ## Screenshots
 
-![Tickets Dashboard (Light)](docs/screenshots/v5/dashboard_light.png)
+![Tickets Dashboard (Light)](project-docs/screenshots/v5/dashboard_light.png)
 
-![Submit Ticket result with suggested fix (Light)](docs/screenshots/v2/01_submit_light.png)
+![Submit Ticket result with suggested fix (Light)](project-docs/screenshots/v2/01_submit_light.png)
 
-![Approvals queue (Light)](docs/screenshots/v4/02_approvals_light.png)
+![Approvals queue (Light)](project-docs/screenshots/v4/02_approvals_light.png)
 
-![Audit Log with a valid hash chain (Dark)](docs/screenshots/v2/03_audit_dark.png)
+![Audit Log with a valid hash chain (Dark)](project-docs/screenshots/v2/03_audit_dark.png)
 
 Dark variants of the dashboard, submit, approvals, audit, keys, and eval
-pages are in `docs/screenshots/v2/`–`v5/`.
+pages are in `project-docs/screenshots/v2/`–`v5/`.
 
 ## What it does
 
@@ -307,7 +307,7 @@ TicketPilot/
     langfuse_check.py     # Langfuse connection test
     run_all.sh            # start API + UI
   tests/                  # pytest suite (mocked, no network)
-  docs/
+  project-docs/
     DEMO_SCRIPT.md        # 2-minute demo script
     screenshots/          # UI screenshots by version
 ```

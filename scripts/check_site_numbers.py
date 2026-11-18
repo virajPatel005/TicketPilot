@@ -1,5 +1,5 @@
 #!/usr/bin/env python3
-"""Check the numbers shown on site/index.html against the results files.
+"""Check the numbers shown on docs/index.html against the results files.
 
 Prints any mismatch. Exit 1 on mismatch. No network, no API calls.
 """
@@ -9,7 +9,7 @@ import sys
 from pathlib import Path
 
 ROOT = Path(__file__).resolve().parent.parent
-SITE = ROOT / "site" / "index.html"
+SITE = ROOT / "docs" / "index.html"
 EVAL = ROOT / "eval"
 
 

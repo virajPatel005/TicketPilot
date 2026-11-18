@@ -1,12 +1,12 @@
 # TicketPilot — Pre-publication Security Audit
 
 **Scope:** everything under the project folder that would be published
-(`site/`, `docs/`, `eval/`, `data/`, `scripts/`, `app/`, `ui/`, `tests/`,
+(`docs/`, `project-docs/`, `eval/`, `data/`, `scripts/`, `app/`, `ui/`, `tests/`,
 `README.md`, `.env.example`, `.gitignore`). Skipped: `.venv/`,
 `__pycache__/`, `.env` itself (`.env` was never read — no secret values
 were ever inspected). No LLM/API calls were made.
 
-**Report files produced:** `docs/SECURITY_REPORT.md` (this report) and
+**Report files produced:** `project-docs/SECURITY_REPORT.md` (this report) and
 `scripts/scan_secrets.py` (secret scanner, pattern-scan mode was run;
 `--exact` mode was written but NOT run).
 
@@ -16,7 +16,7 @@ were ever inspected). No LLM/API calls were made.
 
 Scanner: `scripts/scan_secrets.py` (pattern-scan mode, run). It scans text
 files, JSON/JSONL/CSV, markdown, HTML/CSS/JS, shell, SQLite DB text
-content, `eval/cache/`, logs, and anything under `docs/` and `site/`,
+content, `eval/cache/`, logs, and anything under `project-docs/` and `docs/`,
 plus image file names. It reports only the path, line, kind and last 4
 characters — never a full secret.
 
@@ -36,7 +36,7 @@ characters — never a full secret.
   last-4 characters. ✓
 - `.env.example` contains only variable names with empty/safe defaults,
   no real values. ✓
-- Image file names and alt text in `site/` contain no secrets. ✓
+- Image file names and alt text in `docs/` contain no secrets. ✓
 - README numbers verified against results files via
   `scripts/check_readme_numbers.py`: all match. ✓
 
@@ -53,7 +53,7 @@ as instructed.
 `.pytest_cache/`, `data/audit.db`, `data/audit_backup_*.db`,
 `data/llm_calls.jsonl`, `data/chroma/` (CHROMA_PATH), `.venv/`,
 `*.log`, `eval/cache/`, `.playwright-mcp/`, `pw-out/`,
-`docs/screenshots/`.
+`project-docs/screenshots/`.
 
 **Publish list after fix:** 99 files originally; with `data/chroma/`,
 `.venv/` and `*.log` added to `.gitignore`, fewer files would be
@@ -61,7 +61,7 @@ published. No file exceeds 1 MB. The largest published items are eval
 result JSONs (~88 KB each).
 
 **Binary/database files that would be published:** none — `data/chroma/`
-is now ignored. The four PNGs in `site/assets/` are published and were
+is now ignored. The four PNGs in `docs/assets/` are published and were
 checked (no secrets/personal data).
 
 **Personal-data check:** `data/golden_tickets.csv` (60 tickets) and
@@ -121,21 +121,21 @@ was **not** done pending your approval (item 7).
 
 ## 4. Site and docs review
 
-- `site/index.html`, `README.md`, `docs/DEMO_SCRIPT.md`, `eval/*.md`,
+- `docs/index.html`, `README.md`, `project-docs/DEMO_SCRIPT.md`, `eval/*.md`,
   `PLAN.md`, `AGENTS.md`: no secrets, no real personal data, no internal
   paths (`\\wsl.localhost`, `C:\Users`), no private URLs.
 - README author line "Viraj Patel · Demo project using synthetic data."
   — intentional portfolio attribution.
 - All README evaluation numbers match the results JSON files
   (`scripts/check_readme_numbers.py` passes).
-- Placeholder `href="#"` links remain in `site/index.html` (Demo video,
+- Placeholder `href="#"` links remain in `docs/index.html` (Demo video,
   Repository, Watch demo, GitHub, LinkedIn), each marked with a `TODO`
   comment. Left in place per instructions; listed as an open item below.
-- Screenshots (`docs/screenshots/` and `site/assets/`): opened and
+- Screenshots (`project-docs/screenshots/` and `docs/assets/`): opened and
   reviewed `04_keys.png`, `approvals.png`, `dashboard.png`,
   `submit-result.png`, `audit-valid.png` — all show only labels/last-4,
   synthetic subjects, no full keys, emails, real names, or file paths.
-  `site/script.js` has no `innerHTML` with dynamic data (theme toggle +
+  `docs/script.js` has no `innerHTML` with dynamic data (theme toggle +
   IntersectionObserver only) — clean.
 
 ---
@@ -166,7 +166,7 @@ was **not** done pending your approval (item 7).
 | M-2 | Open endpoints / any-approver | **Fixed** | Covered by H-4 |
 | M-3 | All dependencies unpinned | **Open** | Pinning not done — awaiting your approval (item 7) |
 | M-4 | No rate limit | **Fixed** | Covered by H-5 |
-| L-1 | Placeholder `href="#"` links in `site/index.html` | **Accepted (open item)** | Left in place per instructions; listed below |
+| L-1 | Placeholder `href="#"` links in `docs/index.html` | **Accepted (open item)** | Left in place per instructions; listed below |
 | L-2 | Eval result files published | **Accepted** | Synthetic test set; intentional to ship |
 | I-1 | No `LICENSE` file | **Fixed** | MIT `LICENSE` added (Viraj Patel, 2026) |
 | I-2 | Author name in README/footer | **Accepted** | Intentional portfolio attribution |
@@ -206,7 +206,7 @@ was **not** done pending your approval (item 7).
 
 ---
 
-## 8. Open item: placeholder links in site/index.html
+## 8. Open item: placeholder links in docs/index.html
 
 Left in place per instructions (each marked with a `TODO` comment):
 

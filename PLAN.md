@@ -53,10 +53,10 @@ Duplicate Groq keys: keep the first, drop the rest, label-only warning.
       (different tickets). See `eval/compare_v1_v2.md`.
 - [x] **Stage 6** — Streamlit UI v2: Light/Dark enterprise theme
       (`ui/theme.py`, `scripts/check_contrast.py`, screenshots in
-      `docs/screenshots/v2/`)
+      `project-docs/screenshots/v2/`)
 - [x] **Stage 7a** — Tickets Dashboard + revise-decision
       (`GET /tickets`, `/tickets/summary`, revision flow; screenshots in
-      `docs/screenshots/v3/`)
+      `project-docs/screenshots/v3/`)
 - [x] **Stage 5D** — OpenAI comparison run (`eval/compare_groq_openai.md`;
       OpenAI e2e 0.65, safety misses 0, spend $0.0434). See
       `eval/report_openai.md`.
